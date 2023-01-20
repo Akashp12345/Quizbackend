@@ -12,7 +12,7 @@ const user = require("./Model/userModel")
 const subjectModel=require("./Model/questionModel")
 const app = express()
 const port = process.env.PORT || 8005
-const BASE_URL=process.env.BASE_URL
+
 app.use(express.json())
 app.use(bodyparser.json())
 app.use(cookieparser())
@@ -47,7 +47,7 @@ app.post("/Signin", async (req, res) => {
         res.status(500).json({ message: "Error from server" })
     }
 })
-app.post(`${BASE_URL}/SignUp`, async (req, res) => {
+app.post("/SignUp", async (req, res) => {
 
     try {
 
@@ -76,7 +76,7 @@ app.post(`${BASE_URL}/SignUp`, async (req, res) => {
 })
 
 
-app.post(`${BASE_URL}/Questions`,async(req,res)=>{
+app.post("/Questions",async(req,res)=>{
     try{
         
          let subjects=new subjectModel({
@@ -105,7 +105,7 @@ app.post(`${BASE_URL}/Questions`,async(req,res)=>{
     }
 })
 
-app.get(`${BASE_URL}/Quiz/:language`,async(req,res)=>{
+app.get("/Quiz/:language",async(req,res)=>{
     try{
               let findsubject=await subjectModel.findOne({subject:req.params.language})
               if(findsubject){res.status(200).json(findsubject.questions)}
@@ -127,7 +127,7 @@ let storage = multer.diskStorage({
   })
 let upload = multer({ storage: storage })
 
-app.post(`${BASE_URL}/Quiz/:language`,upload.single('v1'),async(req,res)=>{
+app.post("/Quiz/:language",upload.single('v1'),async(req,res)=>{
     try{
         req.headers['content-type'] = 'multipart/form-data';
         res.setHeader("Content-Type", "multipart/form-data");
@@ -157,7 +157,7 @@ app.post(`${BASE_URL}/Quiz/:language`,upload.single('v1'),async(req,res)=>{
 })
 
 
-app.post(`${BASE_URL}/Profile`,async(req,res)=>{
+app.post("/Profile",async(req,res)=>{
     try{
         let finduser=await user.findOne({email:req.body.email},{_id:0})
         if(finduser){
