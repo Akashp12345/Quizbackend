@@ -16,7 +16,7 @@ const port = process.env.PORT || 8005
 app.use(express.json())
 app.use(bodyparser.json())
 app.use(cookieparser())
-app.use(cors())
+app.use(cors()) 
 
 mongoose.set('strictQuery', false)
 mongoose.connect(process.env.MONGO_PATH, {
