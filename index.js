@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGO_PATH, {
     .then(() => console.log("Connected to Database"))
     .catch(err => console.log(err))
 
-app.post(`${BASE_URL}/Signin`, async (req, res) => {
+app.post("/Signin", async (req, res) => {
     try {
         let finduser = await user.findOne({ $or: [{ email: req.body.username }, { phone: req.body.username }] },{_id:0})
         if (finduser) {
