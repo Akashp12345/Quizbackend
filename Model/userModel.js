@@ -11,9 +11,6 @@ const User=new mongoose.Schema({
     },
     phone:{
         type:String
-    },
-    myquiz:{
-        type:mongoose.Schema.Types.Mixed
     }
 })
 const user=mongoose.model("User",User)
